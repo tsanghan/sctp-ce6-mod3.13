@@ -19,6 +19,7 @@ resource "random_id" "id" {
 resource "aws_secretsmanager_secret" "tsanghan-ce6-secret" {
   name        = "dev/tsanghan-ce6/secrets-${random_id.id.dec}"
   description = "tsanghan-ce6 Secrets ${random_id.id.dec}"
+  recovery_window_in_days = 0
 }
 
 resource "aws_secretsmanager_secret_version" "tsanghan-ce6-secret" {
