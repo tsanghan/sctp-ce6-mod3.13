@@ -23,7 +23,7 @@ resource "aws_secretsmanager_secret" "tsanghan-ce6-secret" {
 
 resource "aws_secretsmanager_secret_version" "tsanghan-ce6-secret" {
   secret_id     = aws_secretsmanager_secret.tsanghan-ce6-secret.id
-  secret_string = "{\"tsanghan-ce6-secrets\":\"staff-koala-${random_id.id.dec}\"}"
+  secret_string = "${jsonencode({tsanghan-ce6-secrets = "staff-koala-${random_id.id.dec}"})}"
 }
 
 
