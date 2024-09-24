@@ -4,7 +4,7 @@
 
 Please see screen captures below for the activities for SCTP Module 3.13.
 
-This repository also container Tofu definition to deploy the Python Lambda code for the same functionality as the activites doen manually via AWS Console.
+This repository also container Tofu definition to deploy the Python Lambda code for the same functionality as the activites done manually via AWS Console.
 
 A GitHub Action Wrokflow Pipeline is also create for CICD.
 
