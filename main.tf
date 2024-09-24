@@ -16,6 +16,16 @@ resource "random_id" "id" {
   byte_length = 8
 }
 
+resource "aws_secretsmanager_secret" "tsanghan-ce6-secret" {
+  name        = "dev/tsanghan-ce6/secrets"
+  description = "tsanghan-ce6 Secrets"
+}
+
+resource "aws_secretsmanager_secret_version" "tsanghan-ce6-secret" {
+  secret_id     = aws_secretsmanager_secret.tsanghan-ce6-secret.id
+  secret_string = "{\"tsanghan-ce6-secrets\":\"staff-koala-15731\"}"
+}
+
 
 # IAM Role for Lambda
 data "aws_iam_policy_document" "lambda_assume_role_policy" {
@@ -44,7 +54,7 @@ data "aws_iam_policy_document" "lambda_policy" {
     ]
 
     resources = [
-      "arn:aws:secretsmanager:ap-southeast-1:255945442255:secret:dev/tsanghan-ce6/secrets-9skqjV"
+      aws_secretsmanager_secret.tsanghan-ce6-secret.id
     ]
   }
 
@@ -89,7 +99,7 @@ resource "aws_lambda_function" "lambda_function" {
 
   environment {
     variables = {
-      SECRET_ID = "arn:aws:secretsmanager:ap-southeast-1:255945442255:secret:dev/tsanghan-ce6/secrets-9skqjV"
+      SECRET_ID = aws_secretsmanager_secret.tsanghan-ce6-secret.id
     }
   }
 
